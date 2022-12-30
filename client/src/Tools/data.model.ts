@@ -19,6 +19,7 @@ export interface Team {
 }
 
 export interface Game {
+    gameCode: string,
     date: Date,
     goalsFavor: number,
     goalsAgainst: number,
@@ -26,7 +27,37 @@ export interface Game {
     local: boolean
 }
 
-export interface ComponentProps {
-    myTeams:MyTeam[];
+export interface ComponentPropsFavoriteTeams {
+    myTeams: MyTeam[];
     teams: Team[];
+    
+}
+
+export interface ComponentPropsGameDetail {
+    myTeamName:string;
+    myTeamImage:string ;
+    rivalName:string;
+    rivalImage:string;
+    gameData:Game;
+    myTeamCode:string; 
+    setLoEnabled:Function;
+    getData:Function;
+    
+}
+
+export interface ComponentPropsNewGame {
+    setLoEnabled:Function;
+    getData:Function;
+    teams:Team[];
+}
+
+export interface ComponentPropsTeamCalendar {
+    myTeams:MyTeam[];
+    teams:Team[];
+    setLoEnabled:Function,getData:Function;
+}
+
+export interface ComponentPropsTeam {
+    name:string;
+    image:string;
 }
