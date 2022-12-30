@@ -1,11 +1,8 @@
-import React from 'react';
-import { useParams,Link,useNavigate, Navigate } from "react-router-dom";
-import {ComponentProps,Team,MyTeam,Game } from "../Tools/data.model";
+import { useNavigate } from "react-router-dom";
+import {ComponentPropsFavoriteTeams,MyTeam } from "../Tools/data.model";
 import '../../node_modules/@fortawesome/fontawesome-free/css/all.css';
 
-import FavoriteTeam from "../Team/Team";
-
-const FavoriteTeams = ({ myTeams, teams }:ComponentProps) => {
+const FavoriteTeams = ({ myTeams, teams }:ComponentPropsFavoriteTeams) => {
     
     const onMyTeamChange = (e:any)=> {
         navigate('/TeamCalendar/' + e.target.value);
@@ -21,7 +18,7 @@ const FavoriteTeams = ({ myTeams, teams }:ComponentProps) => {
                     className="bg-gray-200 hover:bg-opacity-90 text-[#035074] py-2 px-3 rounded mb-3"
                     onChange={onMyTeamChange}>
                     <option value={0}>Select team ...</option>
-                    {myTeams.map((data:MyTeam,n:number) => {
+                    {myTeams!.map((data:MyTeam,n:number) => {
                             return <option key={n} value={data.code}>{data.name}</option>
                     })}
                 </select>

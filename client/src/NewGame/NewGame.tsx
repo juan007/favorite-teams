@@ -6,10 +6,12 @@ import {sendJSONData} from "../Tools/Toolkit";
 
 import {Team } from "../Tools/data.model";
 
+import { ComponentPropsNewGame } from "../Tools/data.model";
+
 const SUBMIT_SCRIPT:string = "http://localhost/put";
 //const SUBMIT_SCRIPT:string = "/post/courses";
 
-const NewGame = ({setLoEnabled, getData, teams}:{setLoEnabled:Function, getData:Function,teams:Team[]}) => {
+const NewGame = ({setLoEnabled, getData, teams}:ComponentPropsNewGame) => {
     
     let { teamCode } = useParams<{teamCode:string}>();
     let Team:(Team | undefined) = teams.find(item=>item.code===teamCode);
@@ -44,7 +46,8 @@ const NewGame = ({setLoEnabled, getData, teams}:{setLoEnabled:Function, getData:
             setErrorMessage(true);
         }
     }
-
+    
+    const navigate = useNavigate();
     
     //When the game was successfully registered
     const onSubmitResponse = ()=> {
@@ -56,7 +59,7 @@ const NewGame = ({setLoEnabled, getData, teams}:{setLoEnabled:Function, getData:
     const onSubmitError = (error:any)=> {
         console.log('Error occured with data submit');
     }
-
+    
     const onDateChange = (e:any) => {
         //set date variable
         setDate(e.target.value);
@@ -101,8 +104,8 @@ const NewGame = ({setLoEnabled, getData, teams}:{setLoEnabled:Function, getData:
             setErrorMessage(false);
     }
 
+    
     //---------State variables
-    const navigate = useNavigate();
     const[date,setDate] = React.useState<string>("");
     const[pointsFavor,setPointsFavor] = React.useState<number>();
     const[pointsAgainst,setPointsAgainst] = React.useState<number>();

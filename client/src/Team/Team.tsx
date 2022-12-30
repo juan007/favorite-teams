@@ -1,8 +1,7 @@
 //Component that renders a team image and name
-import React from 'react';
+import { ComponentPropsTeam } from '../Tools/data.model';
 
-
-const Team = ({name,image}:{name:string,image:string}) =>{
+const Team = ({name,image} : ComponentPropsTeam) =>{
 
 
     return(

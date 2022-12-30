@@ -1,17 +1,11 @@
-//TODO:Captcha
-//TODO:Style site
-//TODO:Check responsiveness
-//TODO:Change goals in favor to points in favor
+//New Team
+//Edit Team
 //TODO:Edit Game
-//TODO:Delete Game
-//TODO:Create Team
-//TODO:Time on games on calendar show pm/am
-
+//TODO:Captcha
 
 import React from 'react';
 import { getJSONData } from "./Tools/Toolkit";
 import { JSONData, MyTeam, Team } from "./Tools/data.model";
-import { useParams,Link,useNavigate } from "react-router-dom";
 import "./../node_modules/@fortawesome/fontawesome-free/css/fontawesome.css"; 
 import "./../node_modules/@fortawesome/fontawesome-free/css/solid.css";
 
@@ -20,7 +14,6 @@ import LoadingOverlay from "./LoadingOverlay/LoadingOverlay";
 //For routing
 import {Route, Routes} from "react-router-dom";
 
-import TeamComponent from "./Team/Team";
 import TeamCalendar from "./TeamCalendar/TeamCalendar";
 import FavoriteTeams from "./FavoriteTeams/FavoriteTeams";
 import NewGame from "./NewGame/NewGame";
@@ -74,14 +67,10 @@ function App() {
           />
           <Route
             path="/TeamCalendar/:code"
-            element = {<TeamCalendar teams={teams} myTeams={myTeams}/>}
+            element = {<TeamCalendar teams={teams} myTeams={myTeams} setLoEnabled={setLoading} getData={getData}/>}
           />
           <Route
             path="/NewGame/:teamCode"
-            element = {<NewGame setLoEnabled={setLoading} getData={getData} teams={teams}/>}
-          />
-          <Route
-            path="/deleteGame/:teamCode/:gameCode"
             element = {<NewGame setLoEnabled={setLoading} getData={getData} teams={teams}/>}
           />
           <Route

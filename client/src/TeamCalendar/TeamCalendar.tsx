@@ -1,12 +1,11 @@
-import React from 'react';
-import { useParams,Link,useNavigate } from "react-router-dom";
-import {ComponentProps,Team,MyTeam,Game } from "../Tools/data.model";
+import { useParams,Link } from "react-router-dom";
+import {ComponentPropsTeamCalendar,MyTeam,Game } from "../Tools/data.model";
 import '../../node_modules/@fortawesome/fontawesome-free/css/all.css';
 
 import GameDetail from "../GameDetail/GameDetail";
 
 //Component that shows the games of a selected team ordered by game date
-const TeamCalendar = ({ myTeams, teams }:ComponentProps) => {
+const TeamCalendar = ({ myTeams, teams,setLoEnabled, getData } : ComponentPropsTeamCalendar) => {
     
     //Selected Team Code sent by URL
     let { code } = useParams<{code:string}>();
@@ -25,7 +24,7 @@ const TeamCalendar = ({ myTeams, teams }:ComponentProps) => {
                 myTeam.games.sort((a,b) => (a.date < b.date) ? 1 : ((b.date < a.date) ? -1 : 0)).map((data:Game, n:number)=>
                     <div key={n} className="py-3">
                         <div className="text-accent font-sans">
-                            <GameDetail myTeamName={myTeam!.name} myTeamImage={myTeamImage!} rivalName={teams.find(item=>item.code===data.rivalCode)!.name} rivalImage={teams.find(item=>item.code===data.rivalCode)!.image} gameData={data} myTeamCode={myTeam!.code}/>
+                            <GameDetail myTeamName={myTeam!.name} myTeamImage={myTeamImage!} rivalName={teams.find(item=>item.code===data.rivalCode)!.name} rivalImage={teams.find(item=>item.code===data.rivalCode)!.image} gameData={data} myTeamCode={myTeam!.code} setLoEnabled={setLoEnabled} getData={getData}/>
                         </div>
                     </div>
                 )
