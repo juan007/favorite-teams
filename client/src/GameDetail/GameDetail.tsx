@@ -33,7 +33,7 @@ const GameDetail = ({myTeamName,myTeamImage,rivalName,rivalImage,gameData,myTeam
         //send the JSON data to the WEb API
         sendJSONData(SUBMIT_SCRIPT,sendString, onSubmitResponse, onSubmitError,'DELETE');
 
-        setShow(false);
+        setShowDelete(false);
         
     }
 
@@ -53,13 +53,43 @@ const GameDetail = ({myTeamName,myTeamImage,rivalName,rivalImage,gameData,myTeam
 
     //Function to show/hide delete confirmation options
     const confirmationToggle = (e:any) => {
-        show?setShow(false):setShow(true);
+        show?setShowDelete(false):setShowDelete(true);
+    }
+
+    //Function to show/hide edit points inputs
+    const editToggle = (e:any) => {
+        showEdit?setShowEdit(false):setShowEdit(true);
+    }
+
+    const onPointsFavorChange = (e:any) => {
+        //set points in favor variable
+        setPointsFavor(e.target.value);
+    }
+
+    const onPointsFavor2Change = (e:any) => {
+        //set points in favor variable
+        setPointsFavor2(e.target.value);
+    }
+
+    const onPointsAgainstChange = (e:any) => {
+        //set name variable
+        setPointsAgainst(e.target.value);
+    }
+
+    const onPointsAgainst2Change = (e:any) => {
+        //set name variable
+        setPointsAgainst2(e.target.value);
     }
 
     //state variables
 
     //variable that handles the visibility of ok and cancel confirmation buttons to delete game
-    const[show,setShow] = React.useState<boolean>(false);
+    const[show,setShowDelete] = React.useState<boolean>(false);
+    const[showEdit,setShowEdit] = React.useState<boolean>(false);
+    const[pointsAgainst,setPointsAgainst] = React.useState<string>(gameData.goalsAgainst.toString());
+    const[pointsAgainst2,setPointsAgainst2] = React.useState<string>(gameData.goalsAgainst.toString());
+    const[pointsFavor,setPointsFavor] = React.useState<string>(gameData.goalsFavor.toString());
+    const[pointsFavor2,setPointsFavor2] = React.useState<string>(gameData.goalsFavor.toString());
 
 
     return(
@@ -70,7 +100,13 @@ const GameDetail = ({myTeamName,myTeamImage,rivalName,rivalImage,gameData,myTeam
                 <table>
                     <tr>
                         <td className='font-semibold'><Team name={myTeamName} image={myTeamImage}/></td>
-                        <td className='pl-3 font-semibold'>{gameData.goalsFavor}</td>
+                        <td style={{ display:(!showEdit ? "flex":"none") }} className='pl-3 font-semibold'>{gameData.goalsFavor}</td>
+                        {/* <td><div><input value={pointsAgainst} maxLength={100} onChange={onPointsAgainstChange} className="bg-gray-200" id="txtGoalsAgainst" type="text" /></div></td> */}
+                        <td style={{ display:(showEdit ? "flex":"none") }} className='pl-2 pt-1'>
+                            <div>
+                                <input value={pointsFavor} maxLength={100} onChange={onPointsFavorChange} className="max-w-[22px] max-h-[20px] border-2 border-slate-300 text-center" id="txtPointsFavor" type="text" />
+                            </div>
+                        </td>
                     </tr>
                    
                     <tr>
@@ -80,12 +116,17 @@ const GameDetail = ({myTeamName,myTeamImage,rivalName,rivalImage,gameData,myTeam
                     </tr>
                     <tr>
                         <td><Team name={rivalName} image={rivalImage}/></td>
-                        <td className='pl-3'>{gameData.goalsAgainst}</td>
+                        <td style={{ display:(!showEdit ? "flex":"none") }} className='pl-3'>{gameData.goalsAgainst}</td>
+                        <td style={{ display:(showEdit ? "flex":"none") }} className='pl-2 pt-1'>
+                            <div>
+                                <input value={pointsAgainst} maxLength={100} onChange={onPointsAgainstChange} className="max-w-[22px] max-h-[20px] border-2 border-slate-300 text-center" id="txtPointsAgainst" type="text" />
+                            </div>
+                        </td>
                     </tr>
                     <tr>
                         <td className='text-center' colSpan={2}>
-                        <button id="btnSubmit" className="text-blue-600 pl-1 pr-1" onClick={confirmationToggle}><i className="fa-solid fa-trash-can"></i></button>
-                            <Link to={`/editGame/`} className="text-blue-600 pl-1"><i className="fa-sharp fa-solid fa-pen-to-square"></i></Link>
+                            <button id="btnDelete" className="text-blue-600 pl-1 pr-1" onClick={confirmationToggle}><i className="fa-solid fa-trash-can"></i></button>
+                            <button id="btnEdit" className="text-blue-600 pl-1 pr-1" onClick={editToggle}><i className="fa-sharp fa-solid fa-pen-to-square"></i></button>
                         </td>
                     </tr>
                     <tr>
@@ -104,8 +145,12 @@ const GameDetail = ({myTeamName,myTeamImage,rivalName,rivalImage,gameData,myTeam
                 <table>
                     <tr>
                         <td><Team name={rivalName} image={rivalImage}/></td>
-                        <td className='pl-3'>{gameData.goalsAgainst}</td>
-                        
+                        <td style={{ display:(!showEdit ? "flex":"none") }} className='pl-3'>{gameData.goalsAgainst}</td>
+                        <td style={{ display:(showEdit ? "flex":"none") }} className='pl-2 pt-1'>
+                            <div>
+                                <input value={pointsAgainst2} maxLength={100} onChange={onPointsAgainst2Change} className="max-w-[22px] max-h-[20px] border-2 border-slate-300 text-center" id="txtPointsAgainst2" type="text" />
+                            </div>
+                        </td>
                     </tr>
                     <tr>
                         <td className='py-3' colSpan={2}>
@@ -114,12 +159,17 @@ const GameDetail = ({myTeamName,myTeamImage,rivalName,rivalImage,gameData,myTeam
                     </tr>
                     <tr>
                         <td className='font-semibold'><Team name={myTeamName} image={myTeamImage}/></td>
-                        <td className='pl-3 font-semibold'>{gameData.goalsFavor}</td>
+                        <td style={{ display:(!showEdit ? "flex":"none") }} className='pl-3 font-semibold'>{gameData.goalsFavor}</td>
+                        <td style={{ display:(showEdit ? "flex":"none") }} className='pl-2 pt-1'>
+                            <div>
+                                <input value={pointsFavor2} maxLength={100} onChange={onPointsFavor2Change} className="max-w-[22px] max-h-[20px] border-2 border-slate-300 text-center" id="txtPointsFavor2" type="text" />
+                            </div>
+                        </td>
                     </tr>
                     <tr>
                         <td className='text-center' colSpan={2}>
-                        <button id="btnSubmit" className="text-blue-600 pl-1 pr-1" onClick={confirmationToggle}><i className="fa-solid fa-trash-can"></i></button>
-                            <Link to={`/editGame/`} className="text-blue-600 pl-1"><i className="fa-sharp fa-solid fa-pen-to-square"></i></Link>
+                            <button id="btnSubmit" className="text-blue-600 pl-1 pr-1" onClick={confirmationToggle}><i className="fa-solid fa-trash-can"></i></button>
+                            <button id="btnEdit" className="text-blue-600 pl-1 pr-1" onClick={editToggle}><i className="fa-sharp fa-solid fa-pen-to-square"></i></button>
                         </td>
                     </tr>
                     <tr>
