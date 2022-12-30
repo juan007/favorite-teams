@@ -5,6 +5,8 @@
 //TODO:Edit Game
 //TODO:Delete Game
 //TODO:Create Team
+//TODO:Time on games on calendar show pm/am
+
 
 import React from 'react';
 import { getJSONData } from "./Tools/Toolkit";
@@ -76,6 +78,10 @@ function App() {
           />
           <Route
             path="/NewGame/:teamCode"
+            element = {<NewGame setLoEnabled={setLoading} getData={getData} teams={teams}/>}
+          />
+          <Route
+            path="/deleteGame/:teamCode/:gameCode"
             element = {<NewGame setLoEnabled={setLoading} getData={getData} teams={teams}/>}
           />
           <Route

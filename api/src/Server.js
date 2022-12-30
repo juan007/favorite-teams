@@ -31,6 +31,7 @@ app.get("/get", async (request, response) => {
         await mongoClient.connect();
         // get reference to database via name
         let db = mongoClient.db(DB_NAME);
+        //let myTeamsArray = await db.collection("myteams").find({ "code":'CA-ON-001',"games.gameCode": '2022-12-29-22-37-41-621' }).sort("name",1).toArray();
         let myTeamsArray = await db.collection("myteams").find().sort("name",1).toArray();
         let teamsArray = await db.collection("teams").find().sort("name",1).toArray();
         let json = { "myteams": myTeamsArray, "teams":teamsArray };
@@ -64,14 +65,21 @@ app.put("/put", async (request, response) => {
         request.body.rivalCode = request.sanitize(request.body.rivalCode);
         request.body.local = request.sanitize(request.body.local);
         
+        //generte game code
+        let today = new Date();
+        let date = today.getFullYear() +'-'+ (today.getMonth()+1) + '-' +  today.getDate();
+        let time = '-' + today.getHours() + '-' + today.getMinutes() + '-' + today.getSeconds() + '-' + today.getMilliseconds();
+        let gameCode = date + time;
         
-        let photoCollection = mongoClient.db(DB_NAME).collection("myteams");
+        let myTeamsCollection = mongoClient.db(DB_NAME).collection("myteams");
         let selector = {"code":request.body.teamCode};
-        let result = await photoCollection.updateOne(selector, 
+        let result = await myTeamsCollection.updateOne(selector, 
         { "$push": 
             {"games": 
                 {
-                    $each:[{"date": request.body.date,
+                    $each:[{
+                    "gameCode": gameCode,
+                    "date": request.body.date,
                     "goalsFavor": parseInt(request.body.pointsFavor),
                     "goalsAgainst": parseInt(request.body.pointsAgainst),
                     "rivalCode": request.body.rivalCode,
@@ -101,6 +109,48 @@ app.put("/put", async (request, response) => {
         response.send({error: error.message});
         throw error;
         //console.log(`>>> ERROR : ${error.message}`);
+    } finally {
+        mongoClient.close();
+    }
+});
+
+//Delete game
+app.delete("/deleteGame", async (request, response) => {
+    // construct MongoClient object for working with MongoDB
+    let mongoClient = new MongoClient(URL, { useUnifiedTopology: true });
+    // Use connect method to connect to the server
+    try {
+        await mongoClient.connect();
+        
+        let teamCode = request.sanitize(request.body.teamCode);
+        let gameCode = request.sanitize(request.body.gameCode);
+        
+        let myTeamsCollection = mongoClient.db(DB_NAME).collection("myteams");
+        
+        //we select the game that corresponds to the game code on the team correspondiong to the team code
+        //on the myteams collection
+        let selector = { "code":teamCode,"games.gameCode": gameCode };
+
+        //the operation is to pop the corresponding game
+        let operation = {$pull : {"games" : {"gameCode":gameCode}}};
+
+        //execute the operation applied to the filter specified by the selector
+        let result = await myTeamsCollection.updateMany(
+            selector,
+            operation
+          );
+
+        if (result.modifiedCount <= 0) {
+            response.status(404);
+            response.send({error: 'No games found with specified code'});
+            return;
+        }
+        response.status(200);
+        response.send(result);
+    } catch (error) {
+        response.status(500);
+        response.send({error: error.message});
+        throw error;
     } finally {
         mongoClient.close();
     }

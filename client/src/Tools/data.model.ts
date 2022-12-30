@@ -19,6 +19,7 @@ export interface Team {
 }
 
 export interface Game {
+    gameCode: string,
     date: Date,
     goalsFavor: number,
     goalsAgainst: number,

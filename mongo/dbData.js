@@ -7,63 +7,63 @@ db.myteams.drop();
 // insert new documents into collection
 db.myteams.insert([
     {
-        "code": "CA-NS-001",
-        "name": "TRURO BEARS",
-        "games": [
-            {
-                "date": "2022-11-20T12:05:45",
-                "goalsFavor": 3,
-                "goalsAgainst": 4,
-                "rivalCode":"CA-NS-002",
-                "local": true
-            },
-            {
-                "date": "2022-12-20T12:05:45",
-                "goalsFavor": null,
-                "goalsAgainst": null,
-                "rivalCode":"CA-ON-001",
-                "local": true
-            },
-        ]
-    },
-    {
         "code": "CA-NS-002",
         "name": "HALIFAX WANDERERS ",
         "games": [
-            {
-                "date": "2023-01-20T12:05:45",
-                "goalsFavor": 1,
-                "goalsAgainst": 2,
-                "rivalCode":"CA-NS-001",
-                "local": false
-            },
-            {
-                "date": "2022-12-20T12:05:45",
-                "goalsFavor": null,
-                "goalsAgainst": null,
-                "rivalCode":"CA-ON-001",
-                "local": true
-            },
+        {
+        "gameCode": "2022-12-29-22-37-41-621",
+        "date": "2022-12-23T15:10",
+        "goalsFavor": 3,
+        "goalsAgainst": 4,
+        "rivalCode": "CA-ON-001",
+        "local": true
+        },
+        {
+        "gameCode": "2021-12-29-22-37-41-621",
+        "date": "2023-01-20T12:05:45",
+        "goalsFavor": 1,
+        "goalsAgainst": 2,
+        "rivalCode": "CA-NS-001",
+        "local": false
+        },
+        {
+        "gameCode": "2021-12-29-22-37-41-621",
+        "date": "2022-12-20T12:05:45",
+        "goalsFavor": null,
+        "goalsAgainst": null,
+        "rivalCode": "CA-ON-001",
+        "local": true
+        }
         ]
-    },
+        },
     {
         "code": "CA-ON-001",
         "name": "TORONTO BLUE JAYS",
         "games": [
-            {
-                "date": "2022-02-20T12:05:45",
-                "goalsFavor": 3,
-                "goalsAgainst": 3,
-                "rivalCode":"CA-BC-001",
-                "local": true
-            },
-            {
-                "date": "2022-02-23T16:05:45",
-                "goalsFavor": null,
-                "goalsAgainst": null,
-                "rivalCode":"CA-NS-001",
-                "local": false
-            },
+        {
+        "gameCode": "2022-12-29-22-37-41-621",
+        "date": "2022-12-31T23:42",
+        "goalsFavor": null,
+        "goalsAgainst": null,
+        "rivalCode": "CA-NS-002",
+        "local": false
+        },
+        {
+        "gameCode": "2022-12-29-22-36-39-781",
+        "date": "2022-12-30T18:36",
+        "goalsFavor": null,
+        "goalsAgainst": null,
+        "rivalCode": "CA-NS-002",
+        "local": true
+        },
+        {
+        "gameCode": "2022-12-29-22-35-21-259",
+        "date": "2022-12-29T18:40",
+        "goalsFavor": null,
+        "goalsAgainst": null,
+        "rivalCode": "CA-NS-002",
+        "local": false
+        }
         ]
     }
 ]);
