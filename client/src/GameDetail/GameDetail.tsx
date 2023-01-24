@@ -159,7 +159,14 @@ const GameDetail = ({myTeamName,myTeamImage,rivalName,rivalImage,gameData,myTeam
                         <td className='text-center' colSpan={2} style={{ display:(show ? "flex":"none") }}>
                             <div>Are you sure? </div>
                             <button id="btnSubmit" className="bg-red-700 text-[#FFF] ml-1 pl-1 pr-1 " onClick={onDelete}>Delete</button>
-                            <button id="btnSubmit" className="bg-green-500 text-[#000] ml-1 pl-1 pr-1 " onClick={confirmationToggle}>Cancel</button>
+                            <button id="btnSubmitCancel" className="bg-green-500 text-[#000] ml-1 pl-1 pr-1 " onClick={confirmationToggle}>Cancel</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td className='text-center' colSpan={2} style={{ display:(showEdit ? "flex":"none") }}>
+                            <div>Save score? </div>
+                            <button id="btnSubmitScore" className="bg-green-500 text-[#000] ml-1 pl-1 pr-1 " onClick={onDelete}>Save</button>
+                            <button id="btnSubmitCancelScore" className="bg-green-500 text-[#000] ml-1 pl-1 pr-1 " onClick={editToggle}>Cancel</button>
                         </td>
                     </tr>
                 </table>

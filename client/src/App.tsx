@@ -1,5 +1,3 @@
-// TODO: BUG when new game created the edit inputs of games dont have the correct values
-// TIP for BUG:  When changed dropdown the inputs dont update
 // TODO: Edit Game
 // TODO: New Team
 // TODO: Edit Team
@@ -30,6 +28,11 @@ const RETRIEVE_SCRIPT:string = "http:///localhost/get";
 function App() {
 
   // ---------------------------------------------- event handlers
+
+  /**
+   * Triggered if the API respondend with a result
+   * @param result - is the result fetched by the API
+   */
   const onResponse = (result:JSONData) => {
     setMyTeams(result.myteams);
     setTeams(result.teams);
@@ -48,6 +51,9 @@ function App() {
   const [teams, setTeams] = React.useState<Team[]>([]);
   
   // other methods
+  /**
+   * get all team games
+   */
   const getData = () => {
     getJSONData(RETRIEVE_SCRIPT, onResponse, onError);
   }
