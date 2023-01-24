@@ -1,7 +1,9 @@
-//New Team
-//Edit Team
-//TODO:Edit Game
-//TODO:Captcha
+// TODO: BUG when new game created the edit inputs of games dont have the correct values
+// TIP for BUG:  When changed dropdown the inputs dont update
+// TODO: Edit Game
+// TODO: New Team
+// TODO: Edit Team
+// TODO: Captcha
 
 import React from 'react';
 import { getJSONData } from "./Tools/Toolkit";
@@ -59,7 +61,7 @@ function App() {
       <div className="grid place-items-center text-blue-600 font-serif font-bold text-xl py-2.5">FOLLOWED TEAMS</div>
       {(teams.length>0)? 
         <>
-        <FavoriteTeams myTeams={myTeams} teams={teams}/>
+        <FavoriteTeams myTeams={myTeams} teams={teams} getData={getData}/>
         <Routes>
           <Route
             path="/"

@@ -18,7 +18,9 @@ const GameDetail = ({myTeamName,myTeamImage,rivalName,rivalImage,gameData,myTeam
     //to handle dates
     Moment.locale('en');
     
-    //When the delete button is pressed
+    /** 
+     * When the delete button is pressed
+    */
     const onDelete = (e:any) => {
         
             setLoEnabled(true);
@@ -38,7 +40,11 @@ const GameDetail = ({myTeamName,myTeamImage,rivalName,rivalImage,gameData,myTeam
     }
 
     const navigate = useNavigate();
-    //When the game was successfully registered
+
+    /**
+     * When the game was successfully registered 
+     */
+    
     const onSubmitResponse = ()=> {
         //retreive updated data
         getData();
@@ -46,39 +52,58 @@ const GameDetail = ({myTeamName,myTeamImage,rivalName,rivalImage,gameData,myTeam
         navigate('/TeamCalendar/'+myTeamCode);
     }
 
-    //If there is an error after sending the data to the server
+    /**
+     * If there is an error after sending the data to the server
+     * @param error 
+     */
+    
     const onSubmitError = (error:any)=> {
         console.log('Error occured with data submit');
     }
 
     //Function to show/hide delete confirmation options
+
+    /**
+     * To show or hide the delete confirmation
+     * @param e 
+     */
     const confirmationToggle = (e:any) => {
         show?setShowDelete(false):setShowDelete(true);
     }
 
-    //Function to show/hide edit points inputs
+    
+
+    /**
+     * Function to show/hide edit points inputs 
+     * @param e 
+     */
     const editToggle = (e:any) => {
-        showEdit?setShowEdit(false):setShowEdit(true);
+        if(showEdit){
+            setShowEdit(false)
+        }
+        else{
+            setPointsFavor((gameData.goalsFavor!=null)?gameData.goalsFavor.toString():"");
+            setPointsAgainst((gameData.goalsAgainst!=null)?gameData.goalsAgainst.toString():"");
+            setShowEdit(true);
+        }
     }
 
+    /**
+     * When the Points in Favor input changes
+     * @param e 
+     */
     const onPointsFavorChange = (e:any) => {
         //set points in favor variable
         setPointsFavor(e.target.value);
     }
 
-    const onPointsFavor2Change = (e:any) => {
-        //set points in favor variable
-        setPointsFavor2(e.target.value);
-    }
-
+    /**
+     * When the Points against input changes
+     * @param e 
+     */
     const onPointsAgainstChange = (e:any) => {
         //set name variable
         setPointsAgainst(e.target.value);
-    }
-
-    const onPointsAgainst2Change = (e:any) => {
-        //set name variable
-        setPointsAgainst2(e.target.value);
     }
 
     //state variables
@@ -86,10 +111,11 @@ const GameDetail = ({myTeamName,myTeamImage,rivalName,rivalImage,gameData,myTeam
     //variable that handles the visibility of ok and cancel confirmation buttons to delete game
     const[show,setShowDelete] = React.useState<boolean>(false);
     const[showEdit,setShowEdit] = React.useState<boolean>(false);
-    const[pointsAgainst,setPointsAgainst] = React.useState<string>(gameData.goalsAgainst.toString());
-    const[pointsAgainst2,setPointsAgainst2] = React.useState<string>(gameData.goalsAgainst.toString());
-    const[pointsFavor,setPointsFavor] = React.useState<string>(gameData.goalsFavor.toString());
-    const[pointsFavor2,setPointsFavor2] = React.useState<string>(gameData.goalsFavor.toString());
+    
+    //variables for edit buttons
+    const[pointsFavor,setPointsFavor] = React.useState<string>("");
+    const[pointsAgainst,setPointsAgainst] = React.useState<string>("");
+    
 
 
     return(
@@ -148,7 +174,7 @@ const GameDetail = ({myTeamName,myTeamImage,rivalName,rivalImage,gameData,myTeam
                         <td style={{ display:(!showEdit ? "flex":"none") }} className='pl-3'>{gameData.goalsAgainst}</td>
                         <td style={{ display:(showEdit ? "flex":"none") }} className='pl-2 pt-1'>
                             <div>
-                                <input value={pointsAgainst2} maxLength={100} onChange={onPointsAgainst2Change} className="max-w-[22px] max-h-[20px] border-2 border-slate-300 text-center" id="txtPointsAgainst2" type="text" />
+                                <input value={pointsAgainst} maxLength={100} onChange={onPointsAgainstChange} className="max-w-[22px] max-h-[20px] border-2 border-slate-300 text-center" id="txtPointsAgainst2" type="text" />
                             </div>
                         </td>
                     </tr>
@@ -162,7 +188,7 @@ const GameDetail = ({myTeamName,myTeamImage,rivalName,rivalImage,gameData,myTeam
                         <td style={{ display:(!showEdit ? "flex":"none") }} className='pl-3 font-semibold'>{gameData.goalsFavor}</td>
                         <td style={{ display:(showEdit ? "flex":"none") }} className='pl-2 pt-1'>
                             <div>
-                                <input value={pointsFavor2} maxLength={100} onChange={onPointsFavor2Change} className="max-w-[22px] max-h-[20px] border-2 border-slate-300 text-center" id="txtPointsFavor2" type="text" />
+                                <input value={pointsFavor} maxLength={100} onChange={onPointsFavorChange} className="max-w-[22px] max-h-[20px] border-2 border-slate-300 text-center" id="txtPointsFavor2" type="text" />
                             </div>
                         </td>
                     </tr>
