@@ -15,7 +15,11 @@ const NewGame = ({setLoEnabled, getData, teams}:ComponentPropsNewGame) => {
     
     let { teamCode } = useParams<{teamCode:string}>();
     let Team:(Team | undefined) = teams.find(item=>item.code===teamCode);
-    //When the submit game button is pressed
+    /**
+     * When the submit game button is pressed 
+     * @param e 
+     */
+
     const onSubmit = (e:any) => {
         if(date!="")
         {
@@ -49,7 +53,10 @@ const NewGame = ({setLoEnabled, getData, teams}:ComponentPropsNewGame) => {
     
     const navigate = useNavigate();
     
-    //When the game was successfully registered
+    /**
+     * When the game was successfully registered 
+     */
+
     const onSubmitResponse = ()=> {
         getData();
         navigate('/TeamCalendar/'+teamCode);
@@ -121,10 +128,10 @@ const NewGame = ({setLoEnabled, getData, teams}:ComponentPropsNewGame) => {
             <div><label className='font-bold'>Team</label></div>
             <div><label>{Team?.name}</label></div><br/>
             <div><label className='font-bold'>Date</label></div>
-            <div><input value={date} maxLength={100} onChange={onDateChange} className="bg-gray-200" id="txtDate" type="datetime-local" /></div><br/>
+            <div><input title="THE DATE WHEN YOUR TEAM IS GOING TO PLAY OR WHEN YOUR TEAM PLAYED" value={date} maxLength={100} onChange={onDateChange} className="bg-gray-200" id="txtDate" type="datetime-local" /></div><br/>
             <div><label className='font-bold'>Rival</label></div>
             <div>
-                <select id="lstSamples" 
+                <select title="SELECT YOUR TEAMS RIVAL FOR THIS GAME" id="lstSamples" 
                     className="bg-gray-200 hover:bg-opacity-90 text-[#035074] py-2 px-3 rounded mb-3"
                     onChange={onRivalChange}>
                     {/* adding options to the dropdown based on samples state variable */}
@@ -133,15 +140,16 @@ const NewGame = ({setLoEnabled, getData, teams}:ComponentPropsNewGame) => {
                             return <option key={n} value={data.code}>{data.name}</option>
                     })}
                 </select>
+            <Link title="CLICK TO REGISTER A NEW RIVAL TEAM.  COMING SOON..."  className='text-blue-600  text-center pl-2 pt-2 text-xs' to="">NEW RIVAL <i className="fa-solid fa-plus"></i></Link>
             </div><br/>
             <div><label className='font-bold'>Points in favor</label></div>
-            <div><input value={pointsFavor} maxLength={100} onChange={onPointsFavorChange} className="bg-gray-200" id="txtGoalsFavor" type="text" /></div><br/>
+            <div><input title="IF YOUR TEAM ALREADY PLAYED, REGISTER THE POINTS IN FAVOR HERE" value={pointsFavor} maxLength={100} onChange={onPointsFavorChange} className="bg-gray-200" id="txtGoalsFavor" type="text" /></div><br/>
             <div><label className='font-bold'>Points against</label></div>
-            <div><input value={pointsAgainst} maxLength={100} onChange={onPointsAgainstChange} className="bg-gray-200" id="txtGoalsAgainst" type="text" /></div><br/>
+            <div><input title="IF YOUR TEAM ALREADY PLAYED, REGISTER THE POINTS AGAINST HERE"  value={pointsAgainst} maxLength={100} onChange={onPointsAgainstChange} className="bg-gray-200" id="txtGoalsAgainst" type="text" /></div><br/>
             <div><label className='font-bold'>Is your team playing Local ?</label></div>
             <div>
             {/* <input id="more-info" name="more-info" type="checkbox" onChange={onLocalClick}/> */}
-            <input type="checkbox" id="check" value={local.toString()} 
+            <input title="IF YOUR TEAM IS PLAYING LOCALLY MARK THIS CHECKBOX, IF IT'S PLAYING AS A VISITOR DON'T SELECT THIS CHECKBOX " type="checkbox" id="check" value={local.toString()} 
             onChange={onLocalClick}/> <span>YES</span>
             </div>
             <br/>

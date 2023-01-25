@@ -38,6 +38,7 @@ function App() {
 
   // ---------------------------------------------- lifecycle hooks
   React.useEffect(() => {
+    //bring the data
     getJSONData(RETRIEVE_SCRIPT, onResponse, onError);
   }, []);
 
@@ -63,6 +64,7 @@ function App() {
       {(teams.length>0)? 
         <>
         <FavoriteTeams myTeams={myTeams} teams={teams} getData={getData}/>
+        
         <Routes>
           <Route
             path="/"
