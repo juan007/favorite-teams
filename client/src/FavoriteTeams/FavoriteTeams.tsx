@@ -42,7 +42,8 @@ const FavoriteTeams = ({ myTeams, teams, getData }:ComponentPropsFavoriteTeams) 
                 Where you can save the upcoming <br/>
                 games of your favorite teams and<br/>
                 save the score when the game has<br/>
-                taken place.</p>
+                taken place. Start by selecting a<br/>
+                team. </p>
             </div>
             
         </div>
