@@ -17,7 +17,7 @@ const TeamCalendar = ({ myTeams, teams,setLoEnabled, getData } : ComponentPropsT
         <div className="flex flex-wrap grid place-items-center">
             <div className="flex flex-col flex-nowrap pr-5">
                 <div className='text-blue-600 font-bold text-center text-xl pt-7 font-serif'>{myTeam.name}</div>
-                <Link to={`/newGame/`+myTeam.code} className='text-blue-600 font-bold text-center pt-4'>NEW GAME <i className="fa-solid fa-plus"></i></Link>
+                <Link title="CLICK TO CREATE AN UPCOMING OR ALREADY PLAYED GAME FOR YOUR TEAM" to={`/newGame/`+myTeam.code} className='text-blue-600 font-bold text-center pt-4'>NEW GAME <i className="fa-solid fa-plus"></i></Link>
                 <div className='pt-3 text-center'>Played and Upcomming Matches: </div>
                 {
                 //before mapping we sort the array by date(from recent to past)
@@ -29,7 +29,7 @@ const TeamCalendar = ({ myTeams, teams,setLoEnabled, getData } : ComponentPropsT
                     </div>
                 )
                 }
-                <Link to={`/newGame/`+myTeam.code} className='text-blue-600 font-bold text-center'>NEW GAME <i className="fa-solid fa-plus"></i></Link>
+                <Link title="CLICK TO CREATE AN UPCOMING OR ALREADY PLAYED GAME FOR YOUR TEAM" to={`/newGame/`+myTeam.code} className='text-blue-600 font-bold text-center'>NEW GAME <i className="fa-solid fa-plus"></i></Link>
             </div>
         </div>
         :

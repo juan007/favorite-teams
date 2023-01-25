@@ -24,6 +24,9 @@ const CLIENT_BUILD_PATH = path.join(__dirname, "./../../client/build");
 // adding middleware to define static files location
 app.use("/", express.static(CLIENT_BUILD_PATH));
 
+/**
+ * Retrive all of the teams and games data
+ */
 app.get("/get", async (request, response) => {    
     // construct a MongoClient object, passing in additional options
     let mongoClient = new MongoClient(URL, { useUnifiedTopology: true });
@@ -50,6 +53,9 @@ app.get("/get", async (request, response) => {
     }
 });
 
+/**
+ * Create new game for specific team
+ */
 app.put("/put", async (request, response) => {
     
     // construct a MongoClient object, passing in additional options
@@ -114,7 +120,9 @@ app.put("/put", async (request, response) => {
     }
 });
 
-
+/**
+ * Update specific game of a team
+ */
 app.put("/updateGame", async (request, response) => {
     // construct MongoClient object for working with MongoDB
     let mongoClient = new MongoClient(URL, { useUnifiedTopology: true });
@@ -163,6 +171,9 @@ app.put("/updateGame", async (request, response) => {
     }
 });
 
+/**
+ * Delete specific game of a team
+ */
 //Delete game
 app.delete("/deleteGame", async (request, response) => {
     // construct MongoClient object for working with MongoDB

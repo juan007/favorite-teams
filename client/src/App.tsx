@@ -38,6 +38,7 @@ function App() {
 
   // ---------------------------------------------- lifecycle hooks
   React.useEffect(() => {
+    //bring the data
     getJSONData(RETRIEVE_SCRIPT, onResponse, onError);
   }, []);
 

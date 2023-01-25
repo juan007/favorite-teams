@@ -1,4 +1,10 @@
-// randomly generates a number between the range of low and high
+/**
+ * randomly generates a number between the range of low and high
+ * @param low 
+ * @param high 
+ * @returns 
+ */
+
 function getRandom(low:number = 1, high:number = 10) {
     let randomNumber:number;
     // calculate random number
@@ -7,24 +13,12 @@ function getRandom(low:number = 1, high:number = 10) {
     return randomNumber;
 }
 
-function addKey(functionToCall:Function, myKeyCode:string = "Enter") {
-    // this example exposes issue with scoping and event handlers and how it is solved with arrow function
-
-    // wire up event listener
-    document.addEventListener("keydown", (e:KeyboardEvent) => {
-        // is the key released the provided key? Check keyCode via Event object
-        if (e.code === myKeyCode) {
-            // pressing the enter key will force some browsers to refresh
-            // this command stops the event from going further
-            e.preventDefault();
-            // call provided callback to do everything else that needs to be done
-            functionToCall();
-            // this also helps the event from propagating in some browsers
-            return false;
-        }
-    });
-}
-
+/**
+ * Get XML Data
+ * @param retrieveScript - location of XML
+ * @param success - success callback function
+ * @param failure - failure callback function
+ */
 function getXMLData(retrieveScript:string, success:Function, failure:Function) {
     // send out AJAX request
     let xmlhttp:XMLHttpRequest = new XMLHttpRequest();
@@ -44,6 +38,14 @@ function getXMLData(retrieveScript:string, success:Function, failure:Function) {
     xmlhttp.send();
 }
 
+/**
+ * Send JSON Data to an external API
+ * @param sendScript - Location of the API
+ * @param jsonString - The JSON body
+ * @param success - callback function in case of success
+ * @param failure  - callback function in case of failure
+ * @param requestType - POST/PUT/DELETE
+ */
 function sendJSONData(sendScript:string, jsonString:string, success:Function, failure:Function,requestType:string) {
     // send out AJAX request
     let xmlhttp:XMLHttpRequest = new XMLHttpRequest();
@@ -72,4 +74,4 @@ function getJSONData(retrieveScript:string, success:Function, failure:Function) 
         .catch((error:Error) => failure(error.message));
 }
 
-export {getRandom, addKey, getXMLData, sendJSONData, getJSONData};
+export {getRandom, getXMLData, sendJSONData, getJSONData};
