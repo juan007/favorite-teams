@@ -2,9 +2,10 @@ import { useNavigate } from "react-router-dom";
 import {ComponentPropsFavoriteTeams,MyTeam } from "../Tools/data.model";
 import '../../node_modules/@fortawesome/fontawesome-free/css/all.css';
 
-const FavoriteTeams = ({ myTeams, teams }:ComponentPropsFavoriteTeams) => {
+const FavoriteTeams = ({ myTeams, teams, getData }:ComponentPropsFavoriteTeams) => {
     
     const onMyTeamChange = (e:any)=> {
+        getData();
         navigate('/TeamCalendar/' + e.target.value);
     }
     

@@ -1,8 +1,3 @@
-//New Team
-//Edit Team
-//TODO:Edit Game
-//TODO:Captcha
-
 import React from 'react';
 import { getJSONData } from "./Tools/Toolkit";
 import { JSONData, MyTeam, Team } from "./Tools/data.model";
@@ -28,6 +23,11 @@ const RETRIEVE_SCRIPT:string = "http:///localhost/get";
 function App() {
 
   // ---------------------------------------------- event handlers
+
+  /**
+   * Triggered if the API respondend with a result
+   * @param result - is the result fetched by the API
+   */
   const onResponse = (result:JSONData) => {
     setMyTeams(result.myteams);
     setTeams(result.teams);
@@ -46,6 +46,9 @@ function App() {
   const [teams, setTeams] = React.useState<Team[]>([]);
   
   // other methods
+  /**
+   * get all team games
+   */
   const getData = () => {
     getJSONData(RETRIEVE_SCRIPT, onResponse, onError);
   }
@@ -59,7 +62,7 @@ function App() {
       <div className="grid place-items-center text-blue-600 font-serif font-bold text-xl py-2.5">FOLLOWED TEAMS</div>
       {(teams.length>0)? 
         <>
-        <FavoriteTeams myTeams={myTeams} teams={teams}/>
+        <FavoriteTeams myTeams={myTeams} teams={teams} getData={getData}/>
         <Routes>
           <Route
             path="/"

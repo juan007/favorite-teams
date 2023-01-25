@@ -114,6 +114,55 @@ app.put("/put", async (request, response) => {
     }
 });
 
+
+app.put("/updateGame", async (request, response) => {
+    // construct MongoClient object for working with MongoDB
+    let mongoClient = new MongoClient(URL, { useUnifiedTopology: true });
+    // Use connect method to connect to the server
+    try {
+        await mongoClient.connect();
+        
+        let teamCode = request.sanitize(request.body.teamCode);
+        let gameCode = request.sanitize(request.body.gameCode);
+        let goalsFavor = request.sanitize(request.body.goalsFavor);
+        let goalsAgainst = request.sanitize(request.body.goalsAgainst);
+        
+        let myTeamsCollection = mongoClient.db(DB_NAME).collection("myteams");
+        
+        //we select the game that corresponds to the game code on the team correspondiong to the team code
+        //on the myteams collection
+        let selector = { "code":teamCode,"games.gameCode": gameCode };
+
+        //The new values of the score
+        let newValues = { 
+            $set: {
+                'games.$.goalsFavor': parseInt(goalsFavor),
+                'games.$.goalsAgainst': parseInt(goalsAgainst)
+            }
+        };
+
+        //execute the operation applied to the filter specified by the selector with the new values
+        let result = await myTeamsCollection.updateOne(
+            selector,
+            newValues
+          );
+
+        if (result.matchedCount <= 0) {
+            response.status(404);
+            response.send({error: 'No games found with specified code TeamCode:' + teamCode + ' GameCode:' + gameCode});
+            return;
+        }
+        response.status(200);
+        response.send(result);
+    } catch (error) {
+        response.status(500);
+        response.send({error: error.message});
+        throw error;
+    } finally {
+        mongoClient.close();
+    }
+});
+
 //Delete game
 app.delete("/deleteGame", async (request, response) => {
     // construct MongoClient object for working with MongoDB

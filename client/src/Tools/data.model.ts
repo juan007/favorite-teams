@@ -30,6 +30,7 @@ export interface Game {
 export interface ComponentPropsFavoriteTeams {
     myTeams: MyTeam[];
     teams: Team[];
+    getData:Function;
     
 }
 
@@ -54,7 +55,8 @@ export interface ComponentPropsNewGame {
 export interface ComponentPropsTeamCalendar {
     myTeams:MyTeam[];
     teams:Team[];
-    setLoEnabled:Function,getData:Function;
+    setLoEnabled:Function;
+    getData:Function;
 }
 
 export interface ComponentPropsTeam {
