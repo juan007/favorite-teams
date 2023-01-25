@@ -1,8 +1,3 @@
-// TODO: Edit Game
-// TODO: New Team
-// TODO: Edit Team
-// TODO: Captcha
-
 import React from 'react';
 import { getJSONData } from "./Tools/Toolkit";
 import { JSONData, MyTeam, Team } from "./Tools/data.model";

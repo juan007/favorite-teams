@@ -114,9 +114,7 @@ app.put("/put", async (request, response) => {
     }
 });
 
-/**
- * update game score
- */
+
 app.put("/updateGame", async (request, response) => {
     // construct MongoClient object for working with MongoDB
     let mongoClient = new MongoClient(URL, { useUnifiedTopology: true });
@@ -144,14 +142,14 @@ app.put("/updateGame", async (request, response) => {
         };
 
         //execute the operation applied to the filter specified by the selector with the new values
-        let result = await myTeamsCollection.updateMany(
+        let result = await myTeamsCollection.updateOne(
             selector,
             newValues
           );
 
-        if (result.modifiedCount <= 0) {
+        if (result.matchedCount <= 0) {
             response.status(404);
-            response.send({error: 'No games found with specified code'});
+            response.send({error: 'No games found with specified code TeamCode:' + teamCode + ' GameCode:' + gameCode});
             return;
         }
         response.status(200);

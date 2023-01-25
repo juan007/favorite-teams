@@ -11,7 +11,8 @@ import '../../node_modules/@fortawesome/fontawesome-free/css/all.css';
 
 import {sendJSONData} from "../Tools/Toolkit";
 
-const SUBMIT_SCRIPT:string = "http://localhost/deleteGame";
+const DELETE_SCRIPT:string = "http://localhost/deleteGame";
+const UPDATE_SCRIPT:string = "http://localhost/updateGame";
 
 const GameDetail = ({myTeamName,myTeamImage,rivalName,rivalImage,gameData,myTeamCode,setLoEnabled, getData}:ComponentPropsGameDetail) =>{
 
@@ -33,16 +34,42 @@ const GameDetail = ({myTeamName,myTeamImage,rivalName,rivalImage,gameData,myTeam
         //serelization.-convert the JSON object to a string 
         let sendString:string = JSON.stringify(sendJSON);
         //send the JSON data to the WEb API
-        sendJSONData(SUBMIT_SCRIPT,sendString, onSubmitResponse, onSubmitError,'DELETE');
+        sendJSONData(DELETE_SCRIPT,sendString, onSubmitResponse, onSubmitError,'DELETE');
 
         setShowDelete(false);
+        
+    }
+
+    /** 
+     * When the delete button is pressed
+    */
+    const onSubmitSocore = (e:any) => {
+        
+        setLoEnabled(true);
+        let sendJSON = 
+        {
+            "teamCode":myTeamCode,
+            "gameCode": gameData.gameCode,
+            "goalsFavor": pointsFavor,
+            "goalsAgainst": pointsAgainst,
+
+        };
+
+       
+        //serelization.-convert the JSON object to a string 
+        let sendString:string = JSON.stringify(sendJSON);
+        console.log(sendString);
+        //send the JSON data to the WEb API
+        sendJSONData(UPDATE_SCRIPT,sendString, onSubmitResponse, onSubmitError,'PUT');
+
+        setShowEdit(false);
         
     }
 
     const navigate = useNavigate();
 
     /**
-     * When the game was successfully registered 
+     * When the game was successfully registered/deleted/updated 
      */
     
     const onSubmitResponse = ()=> {
@@ -165,7 +192,7 @@ const GameDetail = ({myTeamName,myTeamImage,rivalName,rivalImage,gameData,myTeam
                     <tr>
                         <td className='text-center' colSpan={2} style={{ display:(showEdit ? "flex":"none") }}>
                             <div>Save score? </div>
-                            <button id="btnSubmitScore" className="bg-green-500 text-[#000] ml-1 pl-1 pr-1 " onClick={onDelete}>Save</button>
+                            <button id="btnSubmitScore" className="bg-green-500 text-[#000] ml-1 pl-1 pr-1 " onClick={onSubmitSocore}>Save</button>
                             <button id="btnSubmitCancelScore" className="bg-green-500 text-[#000] ml-1 pl-1 pr-1 " onClick={editToggle}>Cancel</button>
                         </td>
                     </tr>

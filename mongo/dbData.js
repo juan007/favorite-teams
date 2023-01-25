@@ -27,7 +27,7 @@ db.myteams.insert([
         "local": false
         },
         {
-        "gameCode": "2021-12-29-22-37-41-621",
+        "gameCode": "2020-12-29-22-37-41-621",
         "date": "2022-12-20T12:05:45",
         "goalsFavor": null,
         "goalsAgainst": null,
@@ -41,7 +41,7 @@ db.myteams.insert([
         "name": "TORONTO BLUE JAYS",
         "games": [
         {
-        "gameCode": "2022-12-29-22-37-41-621",
+        "gameCode": "2019-12-29-22-37-41-621",
         "date": "2022-12-31T23:42",
         "goalsFavor": null,
         "goalsAgainst": null,
@@ -49,7 +49,7 @@ db.myteams.insert([
         "local": false
         },
         {
-        "gameCode": "2022-12-29-22-36-39-781",
+        "gameCode": "2018-12-29-22-36-39-781",
         "date": "2022-12-30T18:36",
         "goalsFavor": null,
         "goalsAgainst": null,
@@ -57,7 +57,7 @@ db.myteams.insert([
         "local": true
         },
         {
-        "gameCode": "2022-12-29-22-35-21-259",
+        "gameCode": "2017-12-29-22-35-21-259",
         "date": "2022-12-29T18:40",
         "goalsFavor": null,
         "goalsAgainst": null,
