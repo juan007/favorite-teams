@@ -63,6 +63,7 @@ function App() {
       {(teams.length>0)? 
         <>
         <FavoriteTeams myTeams={myTeams} teams={teams} getData={getData}/>
+        
         <Routes>
           <Route
             path="/"

@@ -15,6 +15,7 @@ const FavoriteTeams = ({ myTeams, teams, getData }:ComponentPropsFavoriteTeams) 
         (myTeams!==undefined && teams!==undefined )?
         <div className="flex flex-wrap grid place-items-center ">
             <div className="flex flex-row flex-nowrap pr-1">
+                
                 <select id="lstSamples" 
                     className="bg-gray-200 hover:bg-opacity-90 text-[#035074] py-2 px-3 rounded mb-3"
                     onChange={onMyTeamChange}>
@@ -23,6 +24,7 @@ const FavoriteTeams = ({ myTeams, teams, getData }:ComponentPropsFavoriteTeams) 
                             return <option key={n} value={data.code}>{data.name}</option>
                     })}
                 </select>
+                <br/><div className="flex flex-row flex-nowrap pr-1">Welcome</div>
 
                 {/* {myTeams.map((data:MyTeam, n:number)=>
                     <div key={n} className="">
