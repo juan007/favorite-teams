@@ -1,10 +1,24 @@
-# Boilerplate for PROG3017 Full Stack Programming with Express Server and MongoDB
+# Followed Teams App
+
+## Developed with:
+- REACT
+- EXPRESS
+- MONGODB
+- TAILWIND
 
 This project folder contains the React client side and the Express Server side with MondoDB
 
+## Enviroment SetUp
+### `In the root folder npm run setup`
+### `In the api folder npm install cors --save`
+### `In the api folder npm install express-sanitizer --save`
+### `In the client folder npm install @fortawesome/fontawesome-free --save`
+### `In the client folder npm install spinners-react`
+### `In the client folder npm install moment --save`
+
 ## Available Scripts
 
-In the project directory, run command:
+In the project directory, run the command:
 
 ### `docker-compose up --build`
 
@@ -18,10 +32,6 @@ Builds docker container images for production build
 Spins up the container that runs the Express server (running on Node.js) that handles the API requests as well as serves the client side's index.html
 Spins up the container that runs the MongoDB server
 
-### `In root folder npm run setup`
-### `In api folder npm install cors --save`
-### `In api folder npm install express-sanitizer --save`
-### `In client folder npm install @fortawesome/fontawesome-free --save`
-### `In client folder npm install spinners-react`
-### `In client folder npm install moment --save`
+
+
 
