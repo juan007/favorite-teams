@@ -12,24 +12,24 @@ services:
       - "80:80"
     environment:
       NODE_ENV: production
-    # # !!! comment out below if no MongoDB
-    # # ensures that the mongo container spins up first before this container
-    # depends_on:
-    #   - mongo
+    # !!! comment out below if no MongoDB
+    # ensures that the mongo container spins up first before this container
+    depends_on:
+      - mongo
 
-  # # !!! comment out below if no MongoDB
-  # mongo:
-  #   build:
-  #     context: ./mongo
-  #     dockerfile: Dockerfile
-  #   image: mongo-server
-  #   container_name: my-mongo-server  
-  #   volumes:
-  #     - data-volume:/data/db
-  #   environment:
-  #     MONGO_INITDB_DATABASE: [Name of MongoDB Database]
-  #   ports:
-  #     - "27017:27017"
+  # !!! comment out below if no MongoDB
+  mongo:
+    build:
+      context: ./mongo
+      dockerfile: Dockerfile
+    image: mongo-server
+    container_name: my-mongo-server  
+    volumes:
+      - data-volume:/data/db
+    environment:
+      MONGO_INITDB_DATABASE: dbTeams
+    ports:
+      - "27017:27017"
 
 volumes:
     data-volume:
