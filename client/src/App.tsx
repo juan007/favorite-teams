@@ -48,7 +48,7 @@ function App() {
   
   // other methods
   /**
-   * get all team games
+   * get all team games, needed on demand from other components
    */
   const getData = () => {
     getJSONData(RETRIEVE_SCRIPT, onResponse, onError);
@@ -63,6 +63,7 @@ function App() {
       <div className="grid place-items-center text-blue-600 font-serif font-bold text-xl py-2.5">FOLLOWED TEAMS</div>
       {(teams.length>0)? 
         <>
+        {/* Fist component showing the dropdown to pick a favorite team */}
         <FavoriteTeams myTeams={myTeams} teams={teams} getData={getData}/>
         
         <Routes>
