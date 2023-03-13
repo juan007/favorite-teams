@@ -121,26 +121,48 @@ app.put("/put", async (request, response) => {
 });
 
 /**
- * Create new team
+ * Create new game for specific team
  */
-const Team = mongoose.model('Team', teamSchema);
-app.post("/newteam", async (request, response) => {
-
-    // create a new team using the request body
-  const team = new Team({
-    code: request.sanitize(request.body.teamCode),
-    name: request.sanitize(request.body.name),
-    image: request.sanitize(request.body.image)
-  });
+app.put("/put", async (request, response) => {
     
-  team.save((err, team) => {
-    if (err) {
-      console.error(err);
-      res.status(500).send('Error saving team to database');
-    } else {
-      res.status(200).send(team);
+    // construct a MongoClient object, passing in additional options
+    let mongoClient = new MongoClient(URL, { useUnifiedTopology: true });
+    try {
+        await mongoClient.connect();
+
+        //sanitize incoming
+        request.body.code= request.sanitize(request.body.code);
+        request.body.name= request.sanitize(request.body.name);
+        request.body.image= request.sanitize(request.body.image);
+        
+
+        
+        let myTeamsCollection = mongoClient.db(DB_NAME).collection("myteams");
+
+        // create a new team using the request body
+      const team = {
+        code: request.body.code,
+        name: request.body.name,
+        image: request.body.image
+      };
+        
+        // insert the new team into the database
+        let result = await myTeamsCollection.insertOne(team, (err, result) => {
+            if (err) {
+                console.error(err);
+            }
+        });
+        response.status(200);
+        response.send(result);
+
+    } catch (error) {
+        response.status(500);
+        response.send({error: error.message});
+        throw error;
+        //console.log(`>>> ERROR : ${error.message}`);
+    } finally {
+        mongoClient.close();
     }
-  });
 });
 
 /**
