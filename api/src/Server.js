@@ -121,6 +121,29 @@ app.put("/put", async (request, response) => {
 });
 
 /**
+ * Create new team
+ */
+const Team = mongoose.model('Team', teamSchema);
+app.post("/put", async (request, response) => {
+
+    // create a new team using the request body
+  const team = new Team({
+    code: request.sanitize(request.body.teamCode),
+    name: request.sanitize(request.body.name),
+    image: request.sanitize(request.body.image)
+  });
+    
+  team.save((err, team) => {
+    if (err) {
+      console.error(err);
+      res.status(500).send('Error saving team to database');
+    } else {
+      res.status(200).send(team);
+    }
+  });
+});
+
+/**
  * Update specific game of a team
  */
 app.put("/updateGame", async (request, response) => {
