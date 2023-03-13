@@ -8,7 +8,7 @@ import {Team } from "../Tools/data.model";
 
 import { ComponentPropsNewGame } from "../Tools/data.model";
 
-const SUBMIT_SCRIPT:string = "/put";
+const SUBMIT_SCRIPT:string = "http://localhost/put";
 //const SUBMIT_SCRIPT:string = "/post/courses";
 
 const NewGame = ({setLoEnabled, getData, teams}:ComponentPropsNewGame) => {

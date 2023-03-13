@@ -11,8 +11,8 @@ import '../../node_modules/@fortawesome/fontawesome-free/css/all.css';
 
 import {sendJSONData} from "../Tools/Toolkit";
 
-const DELETE_SCRIPT:string = "/deleteGame";
-const UPDATE_SCRIPT:string = "/updateGame";
+const DELETE_SCRIPT:string = "http://localhost/deleteGame";
+const UPDATE_SCRIPT:string = "http://localhost/updateGame";
 
 const GameDetail = ({myTeamName,myTeamImage,rivalName,rivalImage,gameData,myTeamCode,setLoEnabled, getData}:ComponentPropsGameDetail) =>{
 
