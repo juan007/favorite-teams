@@ -124,7 +124,7 @@ app.put("/put", async (request, response) => {
  * Create new team
  */
 const Team = mongoose.model('Team', teamSchema);
-app.post("/put", async (request, response) => {
+app.post("/newteam", async (request, response) => {
 
     // create a new team using the request body
   const team = new Team({
