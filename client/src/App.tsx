@@ -15,8 +15,8 @@ import NewGame from "./NewGame/NewGame";
 import Error from "./Error/Error";
 
 
-const RETRIEVE_SCRIPT:string = "http://localhost/get";
-//const RETRIEVE_SCRIPT:string = "/get";
+//const RETRIEVE_SCRIPT:string = "http://localhost/get";
+const RETRIEVE_SCRIPT:string = "/get";
 
 function App() {
 
